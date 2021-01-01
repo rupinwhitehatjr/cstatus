@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Workflow Dashboards</title>
+<link rel="stylesheet" href="../css/reset.css" />
+<link rel="stylesheet" href="../css/text.css" />
+<link rel="stylesheet" href="../css/960.css" />
+<link rel="stylesheet" href="../css/demo.css" />
+<link rel="stylesheet" href="../css/custom.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+
+  
+  var firebaseConfig = {
+    apiKey: "AIzaSyDKEEwYE0xq_Pb4RXyEjxQR_XnNS04kMgY",
+    authDomain: "renamingfilesforquiz.firebaseapp.com",
+    databaseURL: "https://renamingfilesforquiz.firebaseio.com",
+    projectId: "renamingfilesforquiz",
+    storageBucket: "renamingfilesforquiz.appspot.com",
+    messagingSenderId: "770560109780",
+    appId: "1:770560109780:web:b1df2f0b63dd95f0885f41"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+</script>
+
+
+
+<script type="text/javascript" src="../js/common.js"></script>  
+<script type="text/javascript" src="../js/auth.js"></script>  
+<script type="text/javascript" src="../js/dashboard.js"></script>
+
+<script type="text/javascript" src="../js/humanizedTime.js"></script>
+
+
+
+    
+</head>
+<body>
+
+ <div class="container_12" id="createWorkflowButtonsContainer" >
+
+  <div class="grid_3">
+      &nbsp;
+    </div>
+
+  <div class="grid_6">
+       <a class='button' href="javascript:gotoLink('/curriculumdashboard.html')" >1:1 Curriculum Dashboard</a>
+  
+  </div>
+
+  <div class="grid_3">
+      <h5>
+       &nbsp;
+      <h5>
+    </div>
+  <!-- end .grid_12 -->
+  <div class="clear"></div>  
+
+   <div class="grid_3">
+      &nbsp;
+    </div>
+
+  <div class="grid_6">
+       <a class='button' href="javascript:gotoLink('/multicurriculumdashboard.html')">1:2/1:M Curriculum Dashboard</a>
+  
+  </div>
+
+  <div class="grid_3">
+      <h5>
+       &nbsp;
+      <h5>
+    </div>
+  <!-- end .grid_12 -->
+  <div class="clear"></div>  
+  
+</div> 
+
+  
+
+
+
+
+
+
+
+
+<div id="loading" class="modal custommodal">
+ <div class='modalmessage'>Loading...</div>
+ <div><img src='../img/loading.gif' height="52px"></div>
+</div>
+
+<div id="loginmodal" class="modal custommodal">
+ <div class='modalmessage'>Please Wait..</div>
+ <div><img src='../img/loading.gif' height="52px"></div>
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+<!-- end .container_16 -->
+</body>
+</html>

@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Add Student Details</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/text.css" />
+<link rel="stylesheet" href="css/960.css" />
+<link rel="stylesheet" href="css/demo.css" />
+<link rel="stylesheet" href="css/custom.css" />
+<link rel="stylesheet" href="css/navbar.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/firebaseConfig.js"></script>
+<script type="text/javascript" src="js/auth.js"></script>  
+<script type="text/javascript" src="js/addCertificate.js"></script>
+<script type="text/javascript" src="js/common.js"></script> 
+<script type="text/javascript" src="js/navbar.js"></script>      
+</head>
+<body>
+
+<!-- Side navigation -->
+<div class="sidenav">
+  <a href="#">Search Student</a>
+  <a href="#">Add Certificate</a>
+  <a href="#">Update Certificate</a>
+  <a href="#">Logout</a>
+</div>
+
+<div class="container_12" >
+
+	<div class="grid_12">
+      &nbsp;
+  </div>
+
+	
+  <div class="clear"></div>  
+
+  
+  
+</div>
+
+<div class="container_12 step" id="p_container">
+  <div class="grid_12 stepheader">Add Certificate Detail</div>
+  <div class="clear"></div>
+  <form id="studentdetailform">
+  <div class="grid_5 fieldlabel">
+    Name
+  </div>
+   <div class="grid_5 field">
+   <input type="text" class="inputbox" data-key="name" required>
+  </div>
+ 
+  <div class="clear"></div>
+
+  <div class="grid_5 fieldlabel">
+    Email
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="email" required>
+  </div>
+ 
+  <div class="clear"></div>
+
+   <div class="grid_5 fieldlabel">
+    Phone
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="phone" required>
+  </div>
+ 
+  <div class="clear"></div>
+
+
+
+  <div class="grid_5 fieldlabel">
+    Address
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="address" required>
+  </div>
+ 
+  <div class="clear"></div>
+
+
+
+  <div class="grid_5 fieldlabel">
+    Country
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="country" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+
+  <div class="grid_5 fieldlabel">
+    Curriculum
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="curriculum" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+
+  <div class="grid_5 fieldlabel">
+    Certificate Status
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="cstatus" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+
+  <div class="grid_5 fieldlabel">
+    Certificate Type
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="ctype" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+  <div class="grid_5 fieldlabel">
+    AWB
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="awb" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+  <div class="grid_5 fieldlabel">
+    Delivery Vendor
+  </div>
+   <div class="grid_5 field">
+    <input type="text" class="inputbox" data-key="dvendor" required="true">
+  </div>
+ 
+  <div class="clear"></div>
+
+</form>
+  
+  <div class="grid_5">
+    &nbsp;
+  </div> 
+ 
+  <div class="grid_6">    
+    <a id="searchButton" class="button"  onclick="javascript:saveStudentDetail()">Save and Add New
+    </a>
+  </div>  
+
+ 
+  
+  
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="saveModal" class="modal custommodal">
+ <div class='modalmessage'>Please wait, saving your data..</div>
+ <div><img src='img/loading.gif' height="52px"></div>
+</div>
+
+<div id="loginmodal" class="modal custommodal">
+ <div class='modalmessage'>Please Wait..</div>
+ <div><img src='img/loading.gif' height="52px"></div>
+</div>
+
+
+
+
+
+<!-- end .container_16 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</body>
+</html>

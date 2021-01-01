@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Search Workflows</title>
+<link rel="stylesheet" href="../css/reset.css" />
+<link rel="stylesheet" href="../css/text.css" />
+<link rel="stylesheet" href="../css/960.css" />
+<link rel="stylesheet" href="../css/demo.css" />
+<link rel="stylesheet" href="../css/custom.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+
+  
+  var firebaseConfig = {
+    apiKey: "AIzaSyDKEEwYE0xq_Pb4RXyEjxQR_XnNS04kMgY",
+    authDomain: "renamingfilesforquiz.firebaseapp.com",
+    databaseURL: "https://renamingfilesforquiz.firebaseio.com",
+    projectId: "renamingfilesforquiz",
+    storageBucket: "renamingfilesforquiz.appspot.com",
+    messagingSenderId: "770560109780",
+    appId: "1:770560109780:web:b1df2f0b63dd95f0885f41"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+</script>
+
+<script type="text/javascript" src="../js/common.js"></script>  
+<script type="text/javascript" src="../js/auth.js"></script>  
+<script type="text/javascript" src="../js/dashboard.js"></script>
+
+<script type="text/javascript" src="../js/humanizedTime.js"></script>
+
+<script language="javascript">
+  displaykey=["Curriculum", "Class Number", "Product"]
+
+  $(document).on("authready", function(){
+
+   fetchDataForProcess("CurriculumWorkFlow1to2")
+
+  })
+  $(document).ready(function(){
+
+    console.log(displaykey.join("-"))
+    $("#dataKeyHeader").text(displaykey.join("-"))
+  })
+
+</script>
+
+    
+</head>
+<body>
+
+  <div class="container_12">
+  <div class="grid_12 ">
+    &nbsp;
+  </div>
+  <!-- end .grid_12 -->
+  <div class="clear"></div>  
+  
+</div>
+
+<!--<div class="container_12 step" id="p_container">
+  <div class="grid_12 stepheader">Select the Process</div>
+
+  <div class="grid_4 fieldlabel">
+    Process Name
+  </div>
+   <div class="grid_6 field">
+    <select id="process_selector">
+      <option value="-1" selected>Select</option>
+      <option value="CurriculumWorkflow">
+        CurriculumWorkflow
+      </option>
+
+      <option value="CurriculumWorkFlow1to2">
+        CurriculumWorkFlowMulti
+      </option>
+    </select>
+  </div>
+ 
+  <div class="clear"></div>
+
+
+  
+
+  <div class="clear"></div>  
+  
+</div>-->
+
+
+
+
+<div class="container_12 step" id="filterFields">
+  <div class="grid_12 stepheader">Select Filters</div>
+
+  
+  <div class="clear"></div> 
+
+
+  <div class="grid_4 fieldlabel showExtraFilters" id="myaction">
+  Am I the Step Owner?
+  </div>
+  <div class="grid_6 field showExtraFilters">
+    <input type="checkbox" name="myactioncheckbox" id="myactioncheckbox"></input>
+  </div>
+  <div class="clear showExtraFilters"></div> 
+
+
+
+  
+
+   
+  
+</div>
+
+<div class="container_12 invisible" id="buttonsection">
+  <div class="grid_6">
+    &nbsp;
+  </div> 
+  <div class="grid_2">
+  &nbsp;  
+  </div> 
+  <div class="grid_4 alignright">
+    
+    <a  id="searchButton"
+    class="button" 
+    style='width:25%' 
+    onclick="javascript:searchWorkflows()">Search
+    </a>
+  </div>   
+</div>
+
+<div class="container_12 step" id="stepNotifyList">
+  <div class="grid_12 stepheader">
+   <div class="headertitle">Search Results</div>
+   
+</div>
+
+
+  
+  <div class="clear"></div> 
+
+  <div class="grid_12">
+    <table style="width:100%" id="resultstable" class="resultstable">     
+      <tr class="row-header">
+          <th id="dataKeyHeader">
+              &nbsp;
+           </th>
+           
+           <th>
+              Asset
+           </th>
+           <th>
+              Current Stage
+           </th>
+           <th>
+              Last Updated
+           </th>
+           <th>
+              Actioner
+           </th> 
+           <th>
+              View Log
+           </th> 
+      </tr>  
+    </table> 
+</div>
+
+
+
+<div class="clear"></div> 
+
+
+
+  
+  
+</div>
+
+<div class="container_12 invisible" id="buttonsection">
+  <div class="grid_6">
+    &nbsp;
+  </div> 
+  <div class="grid_2">
+  &nbsp;  
+  </div> 
+  <div class="grid_4 alignright">
+   
+    <a  id="approveButton"
+    class="button" 
+    style='width:25%' 
+    onclick="javascript:saveRoles()">Save
+    </a>
+  </div>   
+</div>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<div id="loading" class="modal custommodal">
+ <div class='modalmessage'>Loading...</div>
+ <div><img src='../img/loading.gif' height="52px"></div>
+</div>
+
+<div id="loginmodal" class="modal custommodal">
+ <div class='modalmessage'>Please Wait..</div>
+ <div><img src='../img/loading.gif' height="52px"></div>
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+<!-- end .container_16 -->
+</body>
+</html>
