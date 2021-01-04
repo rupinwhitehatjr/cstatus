@@ -1,9 +1,6 @@
 $(document).ready(function(){
 
-//params=getParams(window.location.href)
-//flow_id=params.id
-
-$("#studentdetailform").validate({errorElement : 'span', errorClass: "formerror"});
+		$("#studentdetailform").validate({errorElement : 'span', errorClass: "formerror"});
 
 })
 
@@ -39,8 +36,7 @@ function saveStudentDetail()
 	$('#studentdetailform').find(':input').each(function(){
   
   		key=$(this).attr("data-key")
-  		value=$(this).val()
-
+  		value=$(this).val().trim()
   		dataJson[key]=value;
 
 	})
@@ -58,7 +54,7 @@ function saveStudentDetail()
 
 
 
-    user=firebase.auth().currentUser
+    user=firebase.auth().currentUser;
 	newCertificateID=db.collection("Certificates").doc(doc_ref.id).set(dataJson)
 	newCertificateID.then(snapshot=>{           
            
