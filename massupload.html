@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Search Student</title>
+<title>Upload Student Details</title>
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="css/text.css" />
 <link rel="stylesheet" href="css/960.css" />
@@ -15,6 +15,7 @@
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
 
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -25,7 +26,7 @@
 
 <script type="text/javascript" src="js/firebaseConfig.js"></script>
 <script type="text/javascript" src="js/auth.js"></script>  
-<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/massupload.js"></script>
 <script type="text/javascript" src="js/common.js"></script> 
 <script type="text/javascript" src="js/navbar.js"></script>      
 </head>
@@ -34,7 +35,8 @@
 <!-- Side navigation -->
 <div class="sidenav">
   <a href="index.html">Search Student</a>
-  <a href="massupload.html">Upload Data</a>  
+  <a href="massupload.html">Upload Data</a>
+ 
   <a href="#">Logout</a>
 </div>
 
@@ -52,33 +54,34 @@
 </div>
 
 <div class="container_12 step" id="p_container">
-  <div class="grid_12 stepheader">Search Student</div>
+  <div class="grid_12 stepheader">Upload Excel File</div>
   <div class="clear"></div>
   <div class="grid_5 fieldlabel">
-    Phone Number
+    Upload Excel File
   </div>
    <div class="grid_5 field">
-   <input type="text" class="inputbox" id="phone">
+   <input type="file" class="input" id="xlfile">
   </div>
  
   <div class="clear"></div>
 
   <div class="grid_5 fieldlabel">
-    Email
+    How Many Rows in the excel?
   </div>
    <div class="grid_5 field">
-    <input type="text" class="inputbox" id="email">
+   <input type="input" id="rowcount"></input>
   </div>
  
   <div class="clear"></div>
 
+  
   <div class="grid_5">
     &nbsp;
-  </div> 
+  </div>
  
-  <div class="grid_6 ">
+  <div class="grid_6">
     
-    <a id="searchButton" class="button" style="width:25%" onclick="javascript:executeSearch()">Search
+    <a id="searchButton" class="button" style="width:25%" onclick="javascript:uploadxl()">Upload
     </a>
   </div>  
 
@@ -91,30 +94,7 @@
 
 
 
-<div class="container_12 step" id="p_container">
-  <div class="grid_12 stepheader">Search Results</div>
-  <div class="clear"></div>  
 
-     <div class="grid_12">
-        <table style="width:100%" id="resultstable" class="resultstable">     
-          <tr class="row-header">
-              
-               
-               <th>
-                  Student Name
-               </th>
-               <th>
-                  Certificate Type
-               </th>
-               <th>
-                  Status
-               </th>
-
-              
-          </tr>  
-        </table> 
-    </div>
-</div>
 
 
 

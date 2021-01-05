@@ -76,37 +76,24 @@ function addRow(doc)
     //curriculum=doc_data["Curriculum"]
     //version=doc_data["Version"]
     //classnumber=doc_data["Class"]
-    name=doc_data["name"]
+    name=doc_data["studentname"]
+    ctype=doc_data["ctype"]
+    cstatus=doc_data["shipmentstatus"]
     
     //time_since_last_update=Date.now()-lastUpdatedDate
 
-    dataKeyList=[]
-
-    
-
-    
-    //time_since_last_update=humanized_time_span(lastUpdatedDate)
-    //console.log(time_since_last_update)
-    
-    /*goButton=$("<img/>").attr("class", "imgButton")
-                        .attr("src", "img/go.png")*/
-
-    /*$(viewFlowLink).append($(goButton)) */                   
+    dataKeyList=[] 
+                     
 
 
     
     $(row).append($("<td/>").append(name))
+    $(row).append($("<td/>").append(ctype))
+    $(row).append($("<td/>").append(cstatus))
 
-    
-    
+       
+
    
-
-   
-    //$(actionButtonCell).append($(viewFlowLink))
-    
-    
-
-   // console.log(dataKey)
     $("#resultstable").append($(row))
 }
 

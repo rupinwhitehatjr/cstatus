@@ -6,3 +6,7 @@ firebase deploy --only functions
 
 
 firebase emulators:start --import=./data --export-on-exit
+
+gcloud functions deploy processExcel --runtime python37 --trigger-resource gs://certificatestatuschecker.appspot.com --trigger-event google.storage.object.finalize --memory 2048MB --region asia-south1
+
+gcloud config set project certificatestatuschecker
