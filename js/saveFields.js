@@ -165,7 +165,7 @@ function userAction(action)
         }
 });
 	flowMeta={}
-	flowMeta["ready"]=false
+	flowMeta["ready"]=true
 	flowMeta["updated_on"]=Date.now()
 	facade.update(flowMeta)
 		
