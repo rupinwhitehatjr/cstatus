@@ -50,14 +50,48 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
     })
   })
 
+
   return allBuffer.then(async function (result) {
+    let i = 0;
+    // Buffer init
+    var batch = db.batch()
     for (const item of result) {
-      await (db.collection("NewCertificate").add(item)).then((docRef) => {
-        // console.log("Document written with ID: ", docRef.id);
-      })
-        .catch((error) => {
-          console.error("Error adding document: ", error);
-        });
-    }
+      i = i + 1
+      var docRef = db.collection("NewCertificate").doc(); //automatically generate unique id
+      // Document create
+      let document = {
+        "crdate": item['Created Date'] ? new Date(item['Created Date']) ? new Date(item['Created Date']) : item['Created Date'] : null,
+        "ctype": item['Type of Certificate'] ? item['Type of Certificate'] : '',
+        "itembundle": item['Item Bundle'] ? item['Item Bundle'] : '',
+        "studentid": item['Student ID'] ? item['Student ID'] : '',
+        "studentname": item['Student name'] ? item['Student name'] : '',
+        "phone": item['Mobile no'] ? item['Mobile no'] : '',
+        "email": item['Email id'] ? item['Email id'] : '',
+        "city": item['City'] ? item['City'] : '',
+        "state": item['State'] ? item['State'] : '',
+        "zipcode": item['Zip Code'] ? item['Zip Code'] : '',
+        "address": item['Full address'] ? item['Full address'] : '',
+        "schoolname": item['school_name'] ? item['school_name'] : '',
+        "websiteurl": item['websiteUrl'] ? item['websiteUrl'] : '',
+        "couriername": item['Courier Name'] ? item['Courier Name'] : '',
+        "couriertype": item['Courier Type'] ? item['Courier Type'] : '',
+        "awb": item['Airway bill'] ? item['Airway bill'] : '',
+        "shipmentstatus": item['Shipment status'] ? item['Shipment status'] : '',
+        "deliverydate": item['Delivery Date'] ? item['Delivery Date'] : '',
+        "vendor": item['Vendor'] ? item['Vendor'] : '',
+        "data_vendor_date": item['Data given to vendor on'] ? new Date(item['Data given to vendor on']) ? new Date(item['Data given to vendor on']) : item['Data given to vendor on'] : null,
+        "printcompletiondate": item['Print completion date'] ? new Date(item['Print completion date']) ? new Date(item['Print completion date']) : item['Print completion date'] : null,
+        "vendordispatchdate": item['Remark'] ? item['Remark'] : ''
+      }
+
+      batch.set(docRef, document)
+
+      // Batch write limit 500 document
+      if (i % 500 === 0 || i === result.length) {
+        await batch.commit()
+        // Buffer
+        var batch = db.batch()
+      }
+    }    
   })
 });
