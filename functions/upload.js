@@ -60,7 +60,7 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
       var docRef = db.collection("NewCertificate").doc(); //automatically generate unique id
       // Document create
       let document = {
-        "crdate": item['Created Date'] ? new Date(item['Created Date']) ? new Date(item['Created Date']) : item['Created Date'] : null,
+        "crdate": item['Created Date'] ? excelDateToUnix(item['Created Date']) : null,
         "ctype": item['Type of Certificate'] ? item['Type of Certificate'] : '',
         "itembundle": item['Item Bundle'] ? item['Item Bundle'] : '',
         "studentid": item['Student ID'] ? item['Student ID'] : '',
@@ -77,11 +77,12 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
         "couriertype": item['Courier Type'] ? item['Courier Type'] : '',
         "awb": item['Airway bill'] ? item['Airway bill'] : '',
         "shipmentstatus": item['Shipment status'] ? item['Shipment status'] : '',
-        "deliverydate": item['Delivery Date'] ? item['Delivery Date'] : '',
+        "deliverydate": item['Delivery Date'] ? excelDateToUnix(item['Delivery Date']) : null,
         "vendor": item['Vendor'] ? item['Vendor'] : '',
-        "data_vendor_date": item['Data given to vendor on'] ? new Date(item['Data given to vendor on']) ? new Date(item['Data given to vendor on']) : item['Data given to vendor on'] : null,
-        "printcompletiondate": item['Print completion date'] ? new Date(item['Print completion date']) ? new Date(item['Print completion date']) : item['Print completion date'] : null,
-        "vendordispatchdate": item['Remark'] ? item['Remark'] : ''
+        "data_vendor_date": item['Data given to vendor on'] ? excelDateToUnix(item['Data given to vendor on']) : null,
+        "printcompletiondate": item['Print completion date'] ? excelDateToUnix(item['Print completion date']) : null,
+        "vendordispatchdate": item['Dispatch by vendore on'] ? excelDateToUnix(item['Dispatch by vendore on']) : null,
+        "remark" : item['Remark'] ? item['Remark'] : ''        
       }
 
       batch.set(docRef, document)
@@ -95,3 +96,12 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
     }    
   })
 });
+
+function excelDateToUnix(serial) {
+  try {
+    return ((serial - 25569) * 86400)
+  }
+  catch(error) {
+    return null
+  }
+}
