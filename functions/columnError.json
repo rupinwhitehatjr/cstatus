@@ -1,0 +1,71 @@
+{
+    "Created Date": {
+        "errorMessage": "Created Date is not found. Please check 'Created Date' column name should be accurately"
+    },
+    "Type of Certificate": {
+        "errorMessage": "'Type of Certificate' is not found. Please check 'Type of Certificate' column name should be accurately"
+    },
+    "Item Bundle": {
+        "errorMessage": "'Item Bundle' is not found. Please check 'Item Bundle' column name should be accurately"
+    },
+    "Student name": {
+        "errorMessage": "'Student name' is not found. Please check 'Student name' column name should be accurately"
+    },
+    "Student ID": {
+        "errorMessage": "'Student ID' is not found. Please check 'Student ID' column name should be accurately"
+    },
+    "Mobile no": {
+        "errorMessage": "'Mobile no' is not found. Please check 'Mobile no' column name should be accurately"
+    },
+    "Email id": {
+        "errorMessage": "'Email id' is not found. Please check 'Email id' column name should be accurately"
+    },
+    "City": {
+        "errorMessage": "'City' is not found. Please check 'City' column name should be accurately"
+    },
+    "State": {
+        "errorMessage": "'State' is not found. Please check 'State' column name should be accurately"
+    },
+    "Zip Code": {
+        "errorMessage": "'Zip Code' is not found. Please check 'Zip Code' column name should be accurately"
+    },
+    "Full address": {
+        "errorMessage": "'Full address' is not found. Please check 'Full address' column name should be accurately"
+    },
+    "school_name": {
+        "errorMessage": "'school_name' is not found. Please check 'school_name' column name should be accurately"
+    },
+    "websiteUrl": {
+        "errorMessage": "'websiteUrl' is not found. Please check 'websiteUrl' column name should be accurately"
+    },
+    "Courier Name": {
+        "errorMessage": "'Courier Name' is not found. Please check 'Courier Name' column name should be accurately"
+    },
+    "Courier Type": {
+        "errorMessage": "'Courier Type' is not found. Please check 'Courier Type' column name should be accurately"
+    },
+    "Airway bill": {
+        "errorMessage": "'Airway bill' is not found. Please check 'Airway bill' column name should be accurately" 
+    },
+    "Shipment status": {
+        "errorMessage": "'Shipment status' is not found. Please check 'Shipment status' column name should be accurately"
+    },
+    "Delivery Date": {
+        "errorMessage": "'Delivery Date' is not found. Please check 'Delivery Date' column name should be accurately"
+    },
+    "Vendor": {
+        "errorMessage": "'Vendor' is not found. Please check 'Vendor' column name should be accurately"
+    },
+    "Data given to vendor on": {
+        "errorMessage": "'Data given to vendor on' is not found. Please check 'Data given to vendor on' column name should be accurately"
+    },
+    "Print completion date": {
+        "errorMessage": "'Print completion date'is not found. Please check 'Print completion date' column name should be accurately"
+    },
+    "Dispatch by vendore on": {
+        "errorMessage": "'Dispatch by vendore on' is not found. Please check 'Dispatch by vendore on' column name should be accurately"
+    },
+    "Remark": {
+        "errorMessage": "'Remark' is not found. Please check 'Remark column should be accurately"
+    }
+}
