@@ -47,6 +47,8 @@ async function executeSearch()
         	searchResultsCount=results.size
         	//console.log(searchResultsCount)
 			$("tr.row-data").remove()
+			$("#resultstable").children().remove()
+			
 			if(searchResultsCount>0)
 			{
 
@@ -60,9 +62,16 @@ async function executeSearch()
 			//sortResultsList(resultsList)
 			//resultsList.sort( compare );
 
-			for(resultIndex=0;resultIndex<searchResultsCount;resultIndex++)
-			{
-				addRow(resultsList[resultIndex], resultIndex)
+			if(searchResultsCount > 0) {
+				for(resultIndex=0;resultIndex<searchResultsCount;resultIndex++)
+				addRow(resultsList[resultIndex], resultIndex)			
+			}
+			else {
+				swal({
+					title: 'Search',
+					text: 'No Data Found',
+					logo: 'info'
+				})
 			}
 		}
         
@@ -72,7 +81,7 @@ function addRow(doc, id)
 {
     doc_data=doc.data()
     // console.log(doc_data)
-    row=$("<tr/>").attr("class", "row-data, view");
+    row=$("<tr/>").attr("class", "view");
     //curriculum=doc_data["Curriculum"]
     //version=doc_data["Version"]
     //classnumber=doc_data["Class"]
@@ -92,10 +101,17 @@ function addRow(doc, id)
 	websiteurl = doc_data['websiteurl']
 	vendordispatchdate = doc_data['vendordispatchdate']
 	dataVendorDate = doc_data['data_vendor_date']
+	email = doc_data['email']
+	mobile = doc_data['phone']
+	createdAt = doc_data['crdate']
 	var foldData = `<tr class=fold>
               <td colspan=7>
                 <div class=fold-content>
-                  <h3>${name}</h3>
+                  <div class="row mr-auto">
+				  <h3 class="col-4">${name}</h3>
+				  <h5 class="col-4">Email:- ${email}</h5>
+				  <h5 class="col-4">Phone:- ${phone}</h5>
+				  </div>
                   <p>Details Of Student</p>
                   <table>
                     <thead>

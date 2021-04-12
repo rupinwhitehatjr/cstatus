@@ -12,11 +12,11 @@
 	 width: 100%;
 }
  table th {
-	 text-align: left;
+	 text-align: center;
 	 border-bottom: 1px solid #000;
 }
  table th, table td {
-	 padding: 0.4em;
+	 padding: 0.1rem;
 }
  table.fold-table > tbody > tr.view td, table.fold-table > tbody > tr.view th {
 	 cursor: pointer;
@@ -44,7 +44,7 @@
 	 background: #ddd;
 }
  table.fold-table > tbody > tr.view.open {
-	 background: tomato;
+	 background: #02ACB5;
 	 color: white;
 }
  table.fold-table > tbody > tr.view.open td:first-child:before, table.fold-table > tbody > tr.view.open th:first-child:before {
