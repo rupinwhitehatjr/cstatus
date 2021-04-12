@@ -11,15 +11,21 @@
 <link rel="stylesheet" href="css/demo.css" />
 <link rel="stylesheet" href="css/custom.css" />
 <link rel="stylesheet" href="css/navbar.css" />
+<link rel="stylesheet" href="css/error.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+<script src="	https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 
 
 
@@ -71,8 +77,6 @@
    <!-- <div class="grid_5 field">
    <input type="input" id="rowcount"></input>
   </div> -->
- 
-  <div class="clear"></div>
 
   
   <div class="grid_5">
@@ -83,15 +87,18 @@
     
     <a id="searchButton" class="button" style="width:25%" onclick="javascript:uploadxl()">Upload
     </a>
+    <p id="progressBar">
+    </p>
   </div>  
 
- 
+  <div class="clear"></div>
   
   
   
 </div>
 
-
+<div id="errorColumn" class="container scroll-div">
+</div>
 
 
 
@@ -111,8 +118,6 @@
  <div class='modalmessage'>Please Wait..</div>
  <div><img src='img/loading.gif' height="52px"></div>
 </div>
-
-
 
 
 

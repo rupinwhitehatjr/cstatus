@@ -27,6 +27,13 @@ body {
   width: 960px;
 }
 
+.container_table_12,
+.container_16 {
+  margin-left: 25%;
+  margin-right: auto;
+  width: auto
+}
+
 /* `Grid >> Global
 ----------------------------------------------------------------------------------------------------*/
 

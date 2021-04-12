@@ -1,0 +1,7 @@
+.scroll-div {
+    height: 300px;
+    width: 5%;
+    margin: auto;
+    overflow: auto;
+    background: #fff;
+}
