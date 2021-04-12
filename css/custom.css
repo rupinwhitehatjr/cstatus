@@ -554,6 +554,17 @@ table.resultstable >tbody> tr >td
   display:none;
 }
 
+.container_table_12,
+.container_16 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1220px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
 .profilephoto
 {
   width:48px;
@@ -575,6 +586,22 @@ table.resultstable >tbody> tr >td
 {
   border:1px solid #F00 !important;
   background-color: #FFCCCB
+}
+
+.progress {
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 0;
+}
+
+.bg-purple {
+  background-color: #825CD6 !important;
+}
+
+.progress .progress-bar {
+  transition: unset;
 }
 
 
