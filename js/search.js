@@ -17,8 +17,8 @@ async function executeSearch()
 	email=$("#email").val().trim()
 	phoneNumber=$("#phone").val().trim()
 
-	executeQuery=true
-    let query = db.collection("Certificates");
+	executeQuery=false
+    let query = db.collection("NewCertificate");
    
     
 		
@@ -74,6 +74,14 @@ async function executeSearch()
 				})
 			}
 		}
+
+		else {
+			swal({
+				title: 'Field Required',
+				text: 'Email Or Mobile required',
+				icon: 'error'
+			})
+		}
         
 }
 
@@ -104,6 +112,8 @@ function addRow(doc, id)
 	email = doc_data['email']
 	mobile = doc_data['phone']
 	createdAt = doc_data['crdate']
+	console.log(createdAt)
+	console.log(moment(new Date(createdAt * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A"))
 	var foldData = `<tr class=fold>
               <td colspan=7>
                 <div class=fold-content>
@@ -116,6 +126,7 @@ function addRow(doc, id)
                   <table>
                     <thead>
                       <tr>
+					  	<th>Created At</th>
                         <th>Student ID</th>
 						<th>Items</th>
 						<th>City</th>
@@ -132,6 +143,7 @@ function addRow(doc, id)
                     </thead>
                     <tbody>
                       <tr>
+					  <td>${createdAt ? moment(new Date(createdAt * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
                         <td>${studentId}</td>
 						<td>${itembundle}</td>
                         <td>${city}</td>
@@ -139,10 +151,10 @@ function addRow(doc, id)
                         <td>${websiteurl}</td>
                         <td>${couriername}</td>
                         <td>${airbill}</td>
-                        <td>${moment(new Date(deliverydate.seconds), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A")}</td>
-						<td>${moment(new Date(dataVendorDate.seconds), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A")}</td>
-                        <td>${moment(new Date(printcompletiondate.seconds), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A")}</td>
-                        <td>${moment(new Date(vendordispatchdate.seconds), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A")}</td>
+                        <td>${printcompletiondate ? (moment(new Date(deliverydate * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A")): 'Not found'}</td>
+						<td>${dataVendorDate ? moment(new Date(dataVendorDate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
+                        <td>${printcompletiondate ? moment(new Date(printcompletiondate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
+                        <td>${vendordispatchdate ? moment(new Date(vendordispatchdate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
                         <td>${remark}</td>
                       </tr>
                     </tbody>
@@ -163,11 +175,16 @@ function addRow(doc, id)
  
     $("#resultstable").append($(row))
 	$("#resultstable").append($(foldData))
-
+	var i = 0
 	$(function(){
 		$(".fold-table tr.view").on("click", function(){
-		  $(this).toggleClass("open").next(".fold").toggleClass("open");
+		  if(i % 2 === 0) {
+			$(this).addClass("open").next(".fold").addClass("open");
+		  }
+		  else {
+			  $(this).removeClass("open").next(".fold").removeClass("open");
+		  }
+		  i += 1
 		});
-	  });
-	
+	  });	
 }

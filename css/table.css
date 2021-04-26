@@ -16,7 +16,7 @@
 	 border-bottom: 1px solid #000;
 }
  table th, table td {
-	 padding: 0.1rem;
+	 padding: 0.01rem;
 }
  table.fold-table > tbody > tr.view td, table.fold-table > tbody > tr.view th {
 	 cursor: pointer;
