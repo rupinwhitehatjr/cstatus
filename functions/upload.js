@@ -59,13 +59,15 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
     for (const item of result) {
       if(i === 0) {
         let logDocument;
+
+        // Check Column Names
         var checkColumnError = checkColumn(result)
           if(checkColumnError && !(checkColumnError.success) && (checkColumnError.data) && (checkColumnError.data.length > 0)) {
             console.log('Error on column ----->', checkColumnError.message)
             logDocument = {
               errorLog: checkColumnError.data,
               createdAt: +new Date,
-              updateAt: +new Date
+              updatedAt: +new Date
             }
             await db.collection('excelUploadError').doc().set(logDocument)
             return
@@ -73,16 +75,44 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
             logDocument = {
               errorLog: ['Internal error', checkColumnError.message],
               createdAt: +new Date,
-              updateAt: +new Date
+              updatedAt: +new Date
             }
             await db.collection('excelUploadError').doc().set(logDocument)
             return
           }
+
+        // Check Unique Id
+        var checkRowId = checkUniqueId(result)
+        console.log('CHECK ROW ID ----->', checkRowId)
+        if (checkRowId && !(checkRowId.success) && (checkRowId.data) && (checkRowId.data.length > 0)) {
+          console.log('Error on column ----->', checkRowId.message)
+          logDocument = {
+            errorLog: checkRowId.data,
+            createdAt: +new Date,
+            updatedAt: +new Date
+          }
+          await db.collection('excelUploadError').doc().set(logDocument)
+          return
+        } else if (checkRowId && !(checkRowId.success)) {
+          logDocument = {
+            errorLog: ['Internal error', checkRowId.message],
+            createdAt: +new Date,
+            updatedAt: +new Date
+          }
+          await db.collection('excelUploadError').doc().set(logDocument)
+          return
         }
+      }
+      var collectionRef = db.collection('NewCertificate');
+      var query = await collectionRef.where('uniqueId', '==', item["Unique Id"]).get()
+      query.forEach(async doc => {
+        await doc.ref.delete()        
+      })
       i = i + 1
       var docRef = db.collection("NewCertificate").doc(); //automatically generate unique id
       // Document create
       let document = {
+        "uniqueId": item["Unique Id"],
         "crdate": item['Created Date'] ? excelDateToUnix(item['Created Date']) : null,
         "ctype": item['Type of Certificate'] ? item['Type of Certificate'] : '',
         "itembundle": item['Item Bundle'] ? item['Item Bundle'] : '',
@@ -105,7 +135,7 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
         "data_vendor_date": item['Data given to vendor on'] ? excelDateToUnix(item['Data given to vendor on']) : null,
         "printcompletiondate": item['Print completion date'] ? excelDateToUnix(item['Print completion date']) : null,
         "vendordispatchdate": item['Dispatch by vendore on'] ? excelDateToUnix(item['Dispatch by vendore on']) : null,
-        "remark" : item['Remark'] ? item['Remark'] : ''        
+        "remark": item['Remark'] ? item['Remark'] : ''
       }
 
       batch.set(docRef, document)
@@ -114,9 +144,9 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
       if (i % 500 === 0 || i === result.length) {
         await batch.commit()
         // Buffer
-        var batch = db.batch()
+        batch = db.batch()
       }
-    }    
+    }
   })
 });
 
@@ -142,11 +172,12 @@ function checkColumn(setItem) {
       'websiteUrl', 'Courier Name', 'Courier Type',
       'Airway bill', 'Shipment status', 'Delivery Date',
       'Vendor', 'Data given to vendor on', 'Print completion date',
-      'Dispatch by vendore on', 'Remark'
+      'Dispatch by vendore on', 'Remark', "Unique Id"
     ]
     var differenceColumn = actualColumn.filter(arr1Item => !keySetArr.includes(arr1Item));
     let errorMessages = new Array()
     for(var i = 0;  i < differenceColumn.length; i++) {
+      console.log("COLUMN ERROR ---------->", columnError[differenceColumn[i]].errorMessage)
       errorMessages.push(columnError[differenceColumn[i]].errorMessage)
     }
     if(errorMessages.length > 0) {
@@ -161,6 +192,54 @@ function checkColumn(setItem) {
         success: true,
         message: 'No error',
         data: []
+      }
+    }
+  }
+  catch (error) {
+    return {
+      success: false,
+      message: error.message,
+      data: []
+    }
+  }
+}
+
+function checkUniqueId(setItem) {
+  try {
+    var keySet = new Set()
+    for (var i in setItem) {
+      console.log('UNIQUE ID ----->', setItem[i]['Unique Id'])
+      if (typeof (setItem[i]['Unique Id']) === 'number') {
+        keySet.add(setItem[i]['Unique Id'])
+      } else {
+        let errorMessages = new Array()
+        errorMessages.push('Excel sheet upload error some row does not contain Unique Id')
+        errorMessages.push('Unique Id should be a number')
+        if (errorMessages.length > 0) {
+          return {
+            success: false,
+            message: 'error',
+            data: errorMessages
+          }
+        }
+      }
+    }
+    if (keySet.size !== setItem.length) {
+      let errorMessages = new Array()
+      errorMessages.push('Unique Id repeted please check excel sheet OR Unique Id not found')
+      if (errorMessages.length > 0) {
+        return {
+          success: false,
+          message: 'error',
+          data: errorMessages
+        }
+      }
+      else {
+        return {
+          success: true,
+          message: 'No error',
+          data: []
+        }
       }
     }
   }
