@@ -27,7 +27,7 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
 
   const fileName = path.basename(filePath);
 
-  const fileRef = await gcs.bucket(fileBucket).file(fileName)
+  const fileRef = gcs.bucket(fileBucket).file(fileName)
 
   const gcsStream = fileRef.createReadStream();
 
@@ -81,7 +81,7 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
             return
           }
 
-        // Check Unique Id
+        // Check Unique Code no
         var checkRowId = checkUniqueId(result)
         console.log('CHECK ROW ID ----->', checkRowId)
         if (checkRowId && !(checkRowId.success) && (checkRowId.data) && (checkRowId.data.length > 0)) {
@@ -104,15 +104,15 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
         }
       }
       var collectionRef = db.collection('NewCertificate');
-      var query = await collectionRef.where('uniqueId', '==', item["Unique Id"]).get()
+      var query = await collectionRef.where('uniqueId', '==', item["Unique Code no"]).get()
       query.forEach(async doc => {
         await doc.ref.delete()        
       })
       i = i + 1
-      var docRef = db.collection("NewCertificate").doc(); //automatically generate unique id
+      var docRef = db.collection("NewCertificate").doc(); //automatically generate Unique Code no
       // Document create
       let document = {
-        "uniqueId": item["Unique Id"],
+        "uniqueId": item["Unique Code no"],
         "crdate": item['Created Date'] ? excelDateToUnix(item['Created Date']) : null,
         "ctype": item['Type of Certificate'] ? item['Type of Certificate'] : '',
         "itembundle": item['Item Bundle'] ? item['Item Bundle'] : '',
@@ -135,7 +135,8 @@ exports.upload = functions.region('asia-south1').storage.object().onFinalize(asy
         "data_vendor_date": item['Data given to vendor on'] ? excelDateToUnix(item['Data given to vendor on']) : null,
         "printcompletiondate": item['Print completion date'] ? excelDateToUnix(item['Print completion date']) : null,
         "vendordispatchdate": item['Dispatch by vendore on'] ? excelDateToUnix(item['Dispatch by vendore on']) : null,
-        "remark": item['Remark'] ? item['Remark'] : ''
+        "remark": item['Remark'] ? item['Remark'] : '',
+        "updatedAt": +new Date
       }
 
       batch.set(docRef, document)
@@ -172,7 +173,7 @@ function checkColumn(setItem) {
       'websiteUrl', 'Courier Name', 'Courier Type',
       'Airway bill', 'Shipment status', 'Delivery Date',
       'Vendor', 'Data given to vendor on', 'Print completion date',
-      'Dispatch by vendore on', 'Remark', "Unique Id"
+      'Dispatch by vendore on', 'Remark', "Unique Code no"
     ]
     var differenceColumn = actualColumn.filter(arr1Item => !keySetArr.includes(arr1Item));
     let errorMessages = new Array()
@@ -208,13 +209,13 @@ function checkUniqueId(setItem) {
   try {
     var keySet = new Set()
     for (var i in setItem) {
-      console.log('UNIQUE ID ----->', setItem[i]['Unique Id'])
-      if (typeof (setItem[i]['Unique Id']) === 'number') {
-        keySet.add(setItem[i]['Unique Id'])
+      console.log('Unique Code no ----->', setItem[i]['Unique Code no'])
+      if (typeof (setItem[i]['Unique Code no']) === 'number') {
+        keySet.add(setItem[i]['Unique Code no'])
       } else {
         let errorMessages = new Array()
-        errorMessages.push('Excel sheet upload error some row does not contain Unique Id')
-        errorMessages.push('Unique Id should be a number')
+        errorMessages.push('Excel sheet upload error some row does not contain Unique Code no')
+        errorMessages.push('Unique Code no should be a number')
         if (errorMessages.length > 0) {
           return {
             success: false,
@@ -226,7 +227,7 @@ function checkUniqueId(setItem) {
     }
     if (keySet.size !== setItem.length) {
       let errorMessages = new Array()
-      errorMessages.push('Unique Id repeted please check excel sheet OR Unique Id not found')
+      errorMessages.push('Unique Code no repeted please check excel sheet OR Unique Code no not found')
       if (errorMessages.length > 0) {
         return {
           success: false,

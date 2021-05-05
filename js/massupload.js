@@ -121,7 +121,7 @@ async function uploadxl()
 									title: 'Congratulation, File has been uploaded',
 									button: false
 								}).then((res) => {
-									window.location = 'http://localhost:5500/index.html'
+									window.location = 'index.html'
 								})
 							}
 						});

@@ -39,7 +39,8 @@ async function executeSearch()
 			query = query.where("phone", '==', phoneNumber);  
 		}
 		
-
+		query = query.orderBy('updatedAt', 'desc')
+		
 		if(executeQuery)
     	{
        
@@ -112,27 +113,51 @@ function addRow(doc, id)
 	email = doc_data['email']
 	mobile = doc_data['phone']
 	createdAt = doc_data['crdate']
-	console.log(createdAt)
-	console.log(moment(new Date(createdAt * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A"))
+	zipcode = doc_data['zipcode']
+	address = doc_data['address']
+	// <div class="row mr-auto">
+	// 			  <h3 class="col-4">${name}</h3>
+	// 			  <h5 class="col-4">Email:- ${email}</h5>
+	// 			  <h5 class="col-4">Phone:- ${phone}</h5>
+	// 			  </div>
 	var foldData = `<tr class=fold>
               <td colspan=7>
                 <div class=fold-content>
-                  <div class="row mr-auto">
-				  <h3 class="col-4">${name}</h3>
-				  <h5 class="col-4">Email:- ${email}</h5>
-				  <h5 class="col-4">Phone:- ${phone}</h5>
-				  </div>
                   <p>Details Of Student</p>
                   <table>
                     <thead>
                       <tr>
 					  	<th>Created At</th>
                         <th>Student ID</th>
-						<th>Items</th>
-						<th>City</th>
-						<th>School Name</th>
-						<th>Website Url</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>phone</th>
+						<th>School Name</th>						
+						<th>City</th>						
+						<th>Website url</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+					  <td>${createdAt ? moment(new Date(createdAt * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY") : 'Not found'}</td>
+                        <td>${studentId}</td>
+						<td>${name}</td>
+						<td>${email}</td>
+						<td>${phone}</td>
+                        <td>${schoolName}</td>						
+						<td>${city}</td>                        
+                        <td><a href=https://${websiteurl} target="_blank">Open Website Url</a></td>                        
+                      </tr>
+                    </tbody>
+                  </table>
+				  <p>Details Of Courier</p>
+                  <table>
+                    <thead>
+                      <tr>					  	
+						<th>Items</th>						
 						<th>Courier Name</th>
+						<th>Address</th>
+						<th>Zip code</th>
 						<th>Airway bill</th>
 						<th>Delivery Date</th>
 						<th>Data given to vendor</th>
@@ -143,18 +168,15 @@ function addRow(doc, id)
                     </thead>
                     <tbody>
                       <tr>
-					  <td>${createdAt ? moment(new Date(createdAt * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
-                        <td>${studentId}</td>
 						<td>${itembundle}</td>
-                        <td>${city}</td>
-                        <td>${schoolName}</td>
-                        <td>${websiteurl}</td>
                         <td>${couriername}</td>
+						<td>${address}</td>
+						<td>${zipcode}</td>
                         <td>${airbill}</td>
-                        <td>${printcompletiondate ? (moment(new Date(deliverydate * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY hh:mm A")): 'Not found'}</td>
-						<td>${dataVendorDate ? moment(new Date(dataVendorDate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
-                        <td>${printcompletiondate ? moment(new Date(printcompletiondate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
-                        <td>${vendordispatchdate ? moment(new Date(vendordispatchdate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY hh:mm A") : 'Not found'}</td>
+                        <td>${printcompletiondate ? (moment(new Date(deliverydate * 1000), "DD/MM/YYYY HH:mm").format("DD/MM/YYYY")): 'Not found'}</td>
+						<td>${dataVendorDate ? moment(new Date(dataVendorDate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY") : 'Not found'}</td>
+                        <td>${printcompletiondate ? moment(new Date(printcompletiondate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY") : 'Not found'}</td>
+                        <td>${vendordispatchdate ? moment(new Date(vendordispatchdate * 1000), "DD/MM/YYYY  HH:mm").format("DD/MM/YYYY") : 'Not found'}</td>
                         <td>${remark}</td>
                       </tr>
                     </tbody>
