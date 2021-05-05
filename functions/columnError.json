@@ -1,6 +1,6 @@
 {
-    "Unique Id": {
-        "errorMessage": "'Unique Id' is not found. Please check 'Unique Id' column name should be accurately"
+    "Unique Code no": {
+        "errorMessage": "'Unique Code no' is not found. Please check 'Unique Code no' column name should be accurately"
     },
     "Created Date": {
         "errorMessage": "Created Date is not found. Please check 'Created Date' column name should be accurately"
