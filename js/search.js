@@ -36,7 +36,7 @@ async function executeSearch()
 			executeQuery=true
 		// console.log(fieldLabel)
 		// console.log(fieldValue)
-			query = query.where("phone", '==', phoneNumber);  
+			query = query.where("phone", '==', parseInt(phoneNumber));  
 		}
 		
 		query = query.orderBy('updatedAt', 'desc')
