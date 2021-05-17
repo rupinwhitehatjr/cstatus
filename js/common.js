@@ -23,6 +23,18 @@ function getLoggedInUserObject()
         return userData;
 }
 
+async function getLoggedInUserRole() {
+	try {
+		// firebase.auth().currentUser.getIdToken(true)
+		const {
+			claims: { admin },
+		} = await firebase.auth().currentUser.getIdTokenResult(true)
+		return admin
+	} catch (err) {
+		return err
+	}
+}
+
 
 function closeAllModals()
 {
