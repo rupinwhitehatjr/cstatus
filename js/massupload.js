@@ -2,11 +2,13 @@ $(document).ready(function(){
 
 })
 
-$(document).on("authready", function(event){
-
+$(document).on("authready", async function(event){
     //openWaitingModal();
 
-
+var adminRole = await getLoggedInUserRole()
+if(!adminRole) {
+	gotoLink('/forbidden.html')
+}
 
 });
 
