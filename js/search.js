@@ -4,11 +4,14 @@ $(document).ready(function(){
 
 })
 
-$(document).on("authready", function(event){
+$(document).on("authready", async function(event){
 
     //openWaitingModal();
     
-    
+	var adminRole = await getLoggedInUserRole()
+	if (adminRole) {
+		$("#uploadData").css("display", "block")
+	}
     
 });
 
@@ -36,7 +39,8 @@ async function executeSearch()
 			executeQuery=true
 		// console.log(fieldLabel)
 		// console.log(fieldValue)
-			query = query.where("phone", '==', parseInt(phoneNumber));  
+		query = query.child("phone")
+			query = query.where("phone", '==', phoneNumber);  
 		}
 		
 		query = query.orderBy('updatedAt', 'desc')

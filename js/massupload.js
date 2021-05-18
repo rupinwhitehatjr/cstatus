@@ -6,7 +6,6 @@ $(document).on("authready", async function(event){
     //openWaitingModal();
 
 var adminRole = await getLoggedInUserRole()
-console.log(adminRole)
 if(!adminRole) {
 	gotoLink('/forbidden.html')
 }
