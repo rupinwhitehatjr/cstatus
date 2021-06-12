@@ -6,10 +6,12 @@
     projectId: "certificatestatuschecker",
     storageBucket: "certificatestatuschecker.appspot.com",
     messagingSenderId: "307736054885",
-    appId: "1:307736054885:web:939a6737fa20757cf90a8c"
+    appId: "1:307736054885:web:939a6737fa20757cf90a8c",
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  const analytics = firebase.analytics();
 
   var db = firebase.firestore();
   //console.log(location.hostname)
